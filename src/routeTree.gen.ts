@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiRouteImport } from './routes/ai'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as MapRouteImport } from './routes/map'
 import { Route as PlanningRouteImport } from './routes/planning'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -37,6 +38,11 @@ const AuthRoute = AuthRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MapRoute = MapRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/docs': typeof DocsRoute
   '/map': typeof MapRoute
   '/planning': typeof PlanningRoute
   '/profile': typeof ProfileRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/docs': typeof DocsRoute
   '/map': typeof MapRoute
   '/planning': typeof PlanningRoute
   '/profile': typeof ProfileRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/ai': typeof AiRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/docs': typeof DocsRoute
   '/map': typeof MapRoute
   '/planning': typeof PlanningRoute
   '/profile': typeof ProfileRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/ai'
     | '/auth'
     | '/dashboard'
+    | '/docs'
     | '/map'
     | '/planning'
     | '/profile'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/ai'
     | '/auth'
     | '/dashboard'
+    | '/docs'
     | '/map'
     | '/planning'
     | '/profile'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/ai'
     | '/auth'
     | '/dashboard'
+    | '/docs'
     | '/map'
     | '/planning'
     | '/profile'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   AiRoute: typeof AiRoute
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
+  DocsRoute: typeof DocsRoute
   MapRoute: typeof MapRoute
   PlanningRoute: typeof PlanningRoute
   ProfileRoute: typeof ProfileRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/map': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiRoute: AiRoute,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
+  DocsRoute: DocsRoute,
   MapRoute: MapRoute,
   PlanningRoute: PlanningRoute,
   ProfileRoute: ProfileRoute,
