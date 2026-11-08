@@ -50,6 +50,7 @@ import { isWithinDhaka } from "@/data/dhakaBoundary";
 import { DHAKA_CENTER } from "@/lib/geo";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+import { buildBackendApiUrl } from "@/lib/api-config";
 
 type Props = {
   here: { lat: number; lng: number } | null;
@@ -59,8 +60,7 @@ type Props = {
   demoScenario?: DemoScenario;
 };
 
-const API_BASE: string =
-  (import.meta as any).env?.VITE_API_URL || "http://localhost:8000";
+const API_BASE: string = buildBackendApiUrl("");
 
 const MAX_DESCRIPTION = 1000;
 
@@ -208,7 +208,7 @@ export function ReportComposer({ here, onClose, onDone, demoScenario = "acceptab
           const base64 = String(reader.result);
           setVoiceBusy(true);
           try {
-            const res = await fetch(`${API_BASE}/api/analyze-voice-report`, {
+            const res = await fetch(buildBackendApiUrl("/api/analyze-voice-report"), {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ audio_base64: base64, mime_type: "audio/webm" }),
@@ -290,7 +290,7 @@ export function ReportComposer({ here, onClose, onDone, demoScenario = "acceptab
     }
     setAnalyzingText(true);
     try {
-      const res = await fetch(`${API_BASE}/api/analyze-report`, {
+      const res = await fetch(buildBackendApiUrl("/api/analyze-report"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: description.trim() }),

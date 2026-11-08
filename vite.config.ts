@@ -12,6 +12,12 @@ export default defineConfig({
     watch: {
       ignored: ["**/backend/**"],
     },
+    proxy: {
+      "/api": {
+        target: process.env.BACKEND_URL || "http://localhost:8000",
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: { "@": `${process.cwd()}/src` },

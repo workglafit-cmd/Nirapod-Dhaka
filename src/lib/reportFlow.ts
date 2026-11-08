@@ -9,8 +9,9 @@
  * with the reported incident" — never as "vision AI detected X".
  */
 
-const DEFAULT_API: string =
-  (import.meta as any).env?.VITE_API_URL || "http://localhost:8000";
+import { buildBackendApiUrl, getBackendBaseUrl } from "./api-config";
+
+const DEFAULT_API: string = getBackendBaseUrl();
 
 export type VerificationStatus =
   | "pending"
@@ -133,7 +134,7 @@ export async function requestDemoVisualVerify(args: {
     body.demo_scenario = args.demoScenario;
   }
 
-  const res = await fetch(`${DEFAULT_API}/api/demo-visual-verify`, {
+  const res = await fetch(buildBackendApiUrl("/api/demo-visual-verify"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
@@ -177,4 +178,4 @@ export async function verifyImageWithBackend(_args: {
   });
 }
 
-export const REPORT_API_BASE = DEFAULT_API;
+export const REPORT_API_BASE = getBackendBaseUrl();
