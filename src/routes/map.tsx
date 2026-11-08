@@ -752,7 +752,7 @@ function DetailSheet({
             </h3>
             <div className="overflow-hidden rounded-xl border border-border shadow-sm">
               <img 
-                src={`${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/proofs/${report.resolution_image_url}`} 
+                src={`${import.meta.env.VITE_SUPABASE_URL || "https://hoiqjshasdechwufjfoy.supabase.co"}/storage/v1/object/public/proofs/${report.resolution_image_url}`} 
                 alt="Resolution Proof" 
                 className="w-full h-auto object-cover max-h-48"
               />
