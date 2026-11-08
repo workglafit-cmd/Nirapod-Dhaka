@@ -1,0 +1,4 @@
+CREATE POLICY "report photos readable" ON storage.objects FOR SELECT USING (bucket_id = 'report-photos');
+CREATE POLICY "report photos upload" ON storage.objects FOR INSERT TO authenticated WITH CHECK (bucket_id = 'report-photos' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "report photos update own" ON storage.objects FOR UPDATE TO authenticated USING (bucket_id = 'report-photos' AND auth.uid()::text = (storage.foldername(name))[1]);
+CREATE POLICY "report photos delete own" ON storage.objects FOR DELETE TO authenticated USING (bucket_id = 'report-photos' AND auth.uid()::text = (storage.foldername(name))[1]);

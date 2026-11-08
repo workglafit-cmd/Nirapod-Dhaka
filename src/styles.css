@@ -1,0 +1,500 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import "leaflet/dist/leaflet.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
+
+/*
+ * Nirapod Dhaka design system.
+ * Light mode only. Calm, official clarity.
+ * Every colour is a semantic token — never hardcode colours in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --font-display: var(--font-heading);
+  --font-sans: var(--font-body);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-crime: var(--crime);
+  --color-crime-tint: var(--crime-tint);
+  --color-crime-deep: var(--crime-deep);
+  --color-infra: var(--infra);
+  --color-infra-tint: var(--infra-tint);
+  --color-infra-deep: var(--infra-deep);
+  --color-accident: var(--accident);
+  --color-accident-tint: var(--accident-tint);
+  --color-accident-deep: var(--accident-deep);
+  --color-resolved: var(--resolved);
+  --color-resolved-tint: var(--resolved-tint);
+  --color-resolved-deep: var(--resolved-deep);
+  --color-pending: var(--pending);
+  --color-pending-tint: var(--pending-tint);
+  --color-pending-deep: var(--pending-deep);
+  --color-sos: var(--sos);
+
+  --shadow-card: var(--shadow-soft);
+  --shadow-lift: var(--shadow-raised);
+  --shadow-elevated: var(--shadow-elevated);
+}
+
+:root {
+  --radius: 1rem;
+
+  --font-heading: "Space Grotesk", "Hind Siliguri", system-ui, sans-serif;
+  --font-body: "Inter", "Hind Siliguri", system-ui, sans-serif;
+
+  /* #F4F6F5 cool off-white */
+  --background: oklch(0.9682 0.0034 174.5);
+  /* #1A1D1E charcoal */
+  --foreground: oklch(0.2371 0.0031 228.8);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  /* #0E9C8C deep teal */
+  --primary: oklch(0.6152 0.1046 180.5);
+  --primary-foreground: oklch(1 0 0);
+  --primary-tint: oklch(0.9528 0.0284 180.5);
+  --primary-deep: oklch(0.4526 0.0806 180.5);
+
+  --secondary: oklch(0.9412 0.0043 174.5);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.9412 0.0043 174.5);
+  --muted-foreground: oklch(0.5203 0.0093 228.8);
+  --accent: oklch(0.9528 0.0284 180.5);
+  --accent-foreground: var(--primary-deep);
+
+  /* #E23350 coral red */
+  --destructive: oklch(0.5951 0.2085 18.5);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.8912 0.0043 174.5);
+  --input: oklch(0.8912 0.0043 174.5);
+  --ring: var(--primary);
+
+  --crime: oklch(0.5951 0.2085 18.5);
+  --crime-tint: oklch(0.9502 0.0294 18.5);
+  --crime-deep: oklch(0.4451 0.1585 18.5);
+
+  /* #E8A33D amber */
+  --infra: oklch(0.7686 0.1327 71.2);
+  --infra-tint: oklch(0.9612 0.0342 71.2);
+  --infra-deep: oklch(0.5386 0.1127 71.2);
+
+  --accident: oklch(0.6152 0.1046 180.5);
+  --accident-tint: oklch(0.9528 0.0284 180.5);
+  --accident-deep: oklch(0.4526 0.0806 180.5);
+
+  /* #2E9E5B green */
+  --resolved: oklch(0.6088 0.1319 153.4);
+  --resolved-tint: oklch(0.9542 0.0331 153.4);
+  --resolved-deep: oklch(0.4488 0.1019 153.4);
+
+  --pending: var(--infra);
+  --pending-tint: var(--infra-tint);
+  --pending-deep: var(--infra-deep);
+
+  --sos: oklch(0.5951 0.2085 18.5);
+
+  --shadow-soft:
+    0 1px 2px oklch(0.2371 0.0031 228.8 / 0.05), 0 4px 16px oklch(0.2371 0.0031 228.8 / 0.06);
+  --shadow-raised:
+    0 2px 6px oklch(0.2371 0.0031 228.8 / 0.08), 0 12px 32px oklch(0.2371 0.0031 228.8 / 0.12);
+  --shadow-elevated:
+    0 8px 40px oklch(0.2371 0.0031 228.8 / 0.12), 0 2px 10px oklch(0.2371 0.0031 228.8 / 0.06);
+}
+
+/* Accessibility: high contrast toggle */
+.contrast-boost {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1 0 0);
+  --muted-foreground: oklch(0.32 0.006 228.8);
+  --border: oklch(0.68 0.006 174.5);
+  --input: oklch(0.55 0.006 174.5);
+  --primary: oklch(0.4526 0.0806 180.5);
+  --crime: oklch(0.4851 0.1885 18.5);
+  --infra: oklch(0.5386 0.1127 71.2);
+  --resolved: oklch(0.4488 0.1019 153.4);
+}
+
+/* Accessibility: text size toggles */
+.text-scale-lg {
+  font-size: 112.5%;
+}
+.text-scale-xl {
+  font-size: 125%;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  :lang(bn) body,
+  [lang="bn"] {
+    font-family: "Hind Siliguri", "Inter", system-ui, sans-serif;
+  }
+
+  button,
+  a[role="button"] {
+    touch-action: manipulation;
+  }
+}
+
+@utility tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@keyframes pin-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.85;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes pin-drop {
+  0% {
+    transform: translateY(-28px) scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes wash-breathe {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.06);
+  }
+}
+
+.animate-pin-drop {
+  animation: pin-drop 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-wash {
+  animation: wash-breathe 5s ease-in-out infinite;
+}
+
+/* Leaflet surface tuning */
+.leaflet-container {
+  font-family: var(--font-body);
+  background: var(--color-background);
+}
+.leaflet-tile {
+  transition: opacity 0.35s ease-in;
+}
+.leaflet-control-attribution {
+  font-size: 10px;
+  background: color-mix(in oklab, var(--color-card) 88%, transparent) !important;
+}
+
+.nd-pin {
+  position: relative;
+  width: 34px;
+  height: 34px;
+}
+.nd-pin-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px 999px 999px 4px;
+  transform: rotate(-45deg);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--color-card);
+}
+.nd-pin-body svg {
+  transform: rotate(45deg);
+}
+.nd-pin-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  animation: pin-pulse 1.8s ease-out infinite;
+}
+
+.nd-cluster {
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--color-card);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary-deep);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ── Authority Dashboard ── */
+
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slide-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes timeline-grow {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+.animate-count-up {
+  animation: count-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-slide-in-up {
+  animation: slide-in-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease both;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Dashboard sidebar */
+.db-sidebar {
+  background: color-mix(in oklab, var(--color-card) 92%, transparent);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border-right: 1px solid var(--color-border);
+  transition: width 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* KPI card lift */
+.db-kpi {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.db-kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+}
+
+/* Report queue row */
+.db-report-row {
+  transition: background-color 0.15s ease;
+}
+.db-report-row:hover {
+  background-color: var(--color-muted);
+}
+
+/* Timeline connector */
+.db-timeline-line {
+  animation: timeline-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* SOS pulse */
+.db-sos-pulse {
+  position: relative;
+}
+.db-sos-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: var(--color-sos);
+  opacity: 0;
+  animation: pin-pulse 1.8s ease-out infinite;
+}
+
+/* Scrollbar for dashboard panels */
+.db-scroll::-webkit-scrollbar { width: 6px; }
+.db-scroll::-webkit-scrollbar-track { background: transparent; }
+.db-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+.db-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-foreground);
+}
+
+
+/* ==========================================================================
+   Editorial Luxury Civic Theme (Passport Seva Aesthetic)
+   ========================================================================== */
+
+.font-editorial,
+.font-serif-luxury {
+  font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+}
+
+.font-jakarta {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+.bg-editorial-cream {
+  background-color: #FAF8F5;
+}
+
+.bg-editorial-obsidian {
+  background-color: #0A0D10;
+}
+
+.text-editorial-gold {
+  color: #D97706;
+}
+
+.bg-editorial-gold {
+  background-color: #E29A26;
+}
+
+.shadow-editorial-card {
+  box-shadow: 0 4px 24px -2px rgba(26, 29, 30, 0.05), 0 1px 4px rgba(26, 29, 30, 0.03);
+}
+
+.shadow-editorial-card-hover {
+  box-shadow: 0 16px 36px -4px rgba(26, 29, 30, 0.08), 0 2px 8px rgba(26, 29, 30, 0.04);
+}
+
+.shadow-editorial-hero {
+  box-shadow: 0 30px 60px -12px rgba(26, 29, 30, 0.15), 0 18px 36px -18px rgba(26, 29, 30, 0.12);
+}
+
+@font-face {
+  font-family: 'AlinurBanglaborno';
+  src: url('/fonts/AlinurBanglaborno.woff2') format('woff2'),
+       url('/fonts/AlinurBanglaborno.woff') format('woff');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:lang(bn) h1,
+:lang(bn) h2,
+:lang(bn) h3,
+:lang(bn) h4,
+:lang(bn) .font-editorial,
+:lang(bn) .font-display,
+[lang="bn"] h1,
+[lang="bn"] h2,
+[lang="bn"] h3,
+[lang="bn"] h4,
+[lang="bn"] .font-editorial,
+[lang="bn"] .font-display,
+.font-bangla-heading,
+.font-banglaborno {
+  font-family: 'AlinurBanglaborno', 'Hind Siliguri', system-ui, sans-serif !important;
+  letter-spacing: 0.01em;
+}
+
+/* Hero cutout entrance reveal */
+@keyframes hero-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(70px) scale(0.92);
+    filter: blur(8px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-gentle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-hero-reveal {
+  animation: hero-reveal 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-hero-float {
+  animation: hero-gentle-float 6s ease-in-out infinite 1.4s;
+}
